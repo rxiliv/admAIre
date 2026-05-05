@@ -1,35 +1,35 @@
-# AdmAIre: Sistema Indossabile di Assistenza per Non Vedenti
+# AdmAIre: Wearable Assistance System for the Blind
 
-AdmAIre è un dispositivo elettronico indossabile all'avanguardia progettato per migliorare l'autonomia e la sicurezza delle persone non vedenti o ipovedenti. Attraverso l'integrazione di intelligenza artificiale, visione artificiale e sensoristica avanzata, il dispositivo analizza l'ambiente circostante in tempo reale, fornendo un'assistenza vocale interattiva e intuitiva.
+AdmAIre is a cutting-edge wearable electronic device designed to enhance the autonomy and safety of blind or visually impaired individuals. Through the integration of artificial intelligence, computer vision, and advanced sensing, the device analyzes the surrounding environment in real-time, providing interactive and intuitive voice assistance.
 
-## Panoramica del Progetto
-L'obiettivo di AdmAIre è colmare il divario tra l'utente e l'ambiente fisico. Il sistema non si limita a rilevare ostacoli, ma "comprende" il contesto, riconoscendo oggetti, volti, segnali stradali e testo, comunicando le informazioni essenziali tramite un'interfaccia audio integrata.
+## Project Overview
+The goal of AdmAIre is to bridge the gap between the user and the physical environment. The system does not just detect obstacles; it "understands" the context, recognizing objects, faces, traffic signs, and text, communicating essential information through an integrated audio interface.
 
-## Architettura del Sistema
-Il sistema si basa su un flusso di dati circolare a bassa latenza:
-1. **Acquisizione:** Il wearable cattura immagini (camera) e dati di prossimità (sensori).
-2. **Trasmissione:** I dati vengono inviati via **Bluetooth Low Energy (BLE)** o **Classic** allo smartphone.
-3. **Elaborazione:** L'App mobile processa i dati tramite modelli di AI (Object Detection, OCR, Scene Description).
-4. **Feedback:** L'App invia il segnale audio al wearable, che lo riproduce tramite i dispositivi di output integrati.
+## System Architecture
+The system is based on a low-latency circular data flow:
+1. **Acquisition:** The wearable captures images (camera) and proximity data (sensors).
+2. **Transmission:** Data is sent via **Bluetooth Low Energy (BLE)** or **Classic** to the smartphone.
+3. **Processing:** The mobile app processes the data using AI models (Object Detection, OCR, Scene Description).
+4. **Feedback:** The app sends the audio signal to the wearable, which plays it through the integrated output devices.
 
-## Caratteristiche Principali
-* **Riconoscimento Oggetti e Scenari:** Identificazione in tempo reale di elementi quotidiani (mezzi di trasporto, ostacoli mobili, arredi, segnaletica).
-* **Navigazione Assistita:** Utilizzo di sensori di distanza (ToF/Ultrasuoni) per avvisi acustici sulla prossimità di ostacoli non rilevabili dalla sola telecamera.
-* **Interfaccia Vocale AI (NLP):** Comunicazione bidirezionale che permette all'utente di porre domande del tipo: *"C'è una sedia libera vicino a me?"* o *"Che numero di autobus sta arrivando?"*.
-* **Lettura Testo (OCR):** Capacità di leggere etichette, menu o cartelli stradali in tempo reale.
-* **Design Ergonomico:** Dispositivo leggero e discreto, ottimizzato per un utilizzo prolungato.
+## Key Features
+* **Object and Scene Recognition:** Real-time identification of everyday elements (means of transport, moving obstacles, furniture, signage).
+* **Assisted Navigation:** Use of distance sensors (ToF/Ultrasonic) for acoustic warnings regarding the proximity of obstacles not detectable by the camera alone.
+* **AI Voice Interface (NLP):** Two-way communication that allows the user to ask questions such as: *"Is there a free chair near me?"* or *"What bus number is arriving?"*.
+* **Text Reading (OCR):** Ability to read labels, menus, or road signs in real-time.
+* **Ergonomic Design:** Lightweight and discreet device, optimized for prolonged use.
 
-## Architettura Tecnica
+## Technical Architecture
 
 ### Hardware
-* **Camera:** Modulo miniaturizzato a basso consumo per lo streaming di frame ottimizzati.
-* **Sensori:** Sensori di distanza a ultrasuoni o ToF (Time-of-Flight).
-* **Comunicazione:** Modulo Bluetooth dual-mode per il trasferimento dati e audio.
-* **Audio Output:** Driver audio integrati per l'assistenza vocale.
-* **Alimentazione:** Batteria Li-Po ottimizzata per coprire l'intera giornata.
+* **Camera:** Miniaturized low-power module for optimized frame streaming.
+* **Sensors:** Ultrasonic or ToF (Time-of-Flight) distance sensors.
+* **Communication:** Dual-mode Bluetooth module for data and audio transfer.
+* **Audio Output:** Integrated audio drivers for voice assistance.
+* **Power Supply:** Li-Po battery optimized to cover the entire day.
 
 ### Software
-* **Computer Vision:** Modelli YOLO (You Only Look Once) o MobileNet per l'object detection in tempo reale.
-* **Intelligenza Artificiale Generativa:** Implementazione di modelli LLM ottimizzati per rispondere alle query dell'utente in linguaggio naturale.
-* **Text-to-Speech (TTS) & STT:** Motori vocali a bassa latenza per un'interazione fluida.
-* **Sensor Fusion:** Algoritmo proprietario per integrare i dati della telecamera con i dati dei sensori di prossimità.
+* **Computer Vision:** YOLO (You Only Look Once) or MobileNet models for real-time object detection.
+* **Generative Artificial Intelligence:** Implementation of optimized LLM models to respond to user queries in natural language.
+* **Text-to-Speech (TTS) & STT:** Low-latency voice engines for fluid interaction.
+* **Sensor Fusion:** Proprietary algorithm to integrate camera data with proximity sensor data.
