@@ -60,6 +60,7 @@ Il modello 3D è disponibile nella cartella `cad`, sia come modello a pezzo unic
 
 ### Software
 Il codice principale risiede nel microcontrollor e può essere trovato nella cartella `firmware`.
+Il software è creato con Arduino IDE.
 
 **Contenuto del Codice**
 * **Codice del Microcontrollore:** Codice che permette all'ESP32-S3 di inviare e ricevere segnali radio, trasmettere le risposte dell'AI, e tutte le funzionalità attaualmente presenti.
