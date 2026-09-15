@@ -10,7 +10,7 @@ void gestisciRoot() {
 }
 
 // Filtro del testo
-String esp32s3::pulisciTesto(String testoSporco) {
+String pulisciTesto(String testoSporco) {
     String pulito = testoSporco;
     pulito.replace("*", "");    
     pulito.replace("\"", "");   
@@ -22,7 +22,7 @@ String esp32s3::pulisciTesto(String testoSporco) {
     return pulito;
 }
 
-void esp32s3::gestisciCattura() {
+void gestisciCattura() {
     camera_fb_t * fb = esp_camera_fb_get();
     if (!fb) { server.send(500, "text/plain", "ERRORE ACQUISIZIONE FOTO"); return; }
     size_t sizeBase64 = ((fb->len + 2) / 3) * 4 + 1;
@@ -37,7 +37,7 @@ void esp32s3::gestisciCattura() {
 // ============================================================================
 // ENDPOINT AI - STAFFETTA MEMORIA E GESTIONE AUDIO SICURA
 // ============================================================================
-void esp32s3::gestisciAnalisi() {
+void gestisciAnalisi() {
     camera_fb_t * fb = esp_camera_fb_get();
     if (!fb) { 
         server.send(500, "text/plain", "Errore fotocamera"); 
@@ -111,13 +111,13 @@ void esp32s3::gestisciAnalisi() {
     server.sendHeader("Connection", "close");
     server.send(200, "text/plain", responseText);
     
-    if (responseText != "" && !responseText.startsWith("Errore") && responseText.trim() != "via libera") {
+    if (responseText != "" && !responseText.startsWith("Errore") && responseText != " via libera") {
         testoDaVocalizzare = responseText;
         timestampRicezioneTesto = millis();
     }
 }
 
-void esp32s3::gestisciBatteria() {
+void gestisciBatteria() {
     uint32_t v = 0;
     for(int i=0; i<10; i++) { v += analogReadMilliVolts(PIN_BATTERIA); delay(5); }
     float vBat = (v / 10.0) * 2.0 / 1000.0; 
@@ -142,7 +142,7 @@ void esp32s3::gestisciBatteria() {
 // ============================================================================
 // INIZIALIZZAZIONE FOTOCAMERA E AUDIO
 // ============================================================================
-bool esp32s3::inizializzaXiaoCamera() {
+bool inizializzaXiaoCamera() {
     camera_config_t config;
     config.ledc_channel = LEDC_CHANNEL_0;
     config.ledc_timer = LEDC_TIMER_0;
