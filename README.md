@@ -22,7 +22,7 @@ The system is based on a low-latency circular data flow:
 **Well-thought-out Design**
 * **Ergonomic Glasses:** Lightweight and discreet device, optimized for prolonged use.
 * **No Hearing Obstruction:** Bone conduction speakers, studied to avoid obstructing the ears and keep the hearing unimpaired.
-* **Customizable Frame and Structure:** Fully editable as one's wish, as the 3D model of the glasses are free to use and modify.
+* **Customizable Frame and Structure:** Fully editable as one's wish, as the 3D model of the glasses are free to use and modify (check `license` for further information).
 
 **Source-Available Project**
 
@@ -53,7 +53,7 @@ The electronic schematics may be found within the `pcb` folder.
 * **Audio Amplifiers:** MAX98357A I2S 3W DAC (x2).
 * **Bone Conduction Speakers:** 8 Ohm Magnetic, 1W (x2).
 * **Slide Switch:** Slide Switch (SPST) for power-on/off.
-* **Resistors** 100-200kΩ Resistors (x2).
+* **Resistors:** 100-200kΩ Resistors (x2).
 
 The eyeglasses frame prototype is made through a 3D printer (PLA).
 The 3D model is available in the `cad` folder, both as a one-piece and subdivided in `.stl` format, making it suitable for small 3D printers as well.
@@ -62,10 +62,10 @@ The 3D model is available in the `cad` folder, both as a one-piece and subdivide
 The main code resides in the microcontroller and can be found in the `firmware` folder.
 
 **Code Content**
-* **Microcontroller Code:** Code that allows the ESP32-S3 to send and receive radio signals, send the AI responses, and all the features mentioned above.
-* **Simple HTML page:** Simple page visible in local host for testing the device and debugging.
+* **Microcontroller Code:** Code that allows the ESP32-S3 to send and receive radio signals, transmit the AI responses, and all the features mentioned above.
+* **Simple HTML page:** Simple page for testing the device and debugging.
 
 **Features and Technologies**
-* **OpenRouter API:** Implementation of optimized AI models to analyze images and to respond to user queries in natural language.
+* **OpenRouter API:** Implementation of the OpenRouter API to use optimized AI models to analyze images and to respond to user queries in natural language.
 * **Text-to-Speech (TTS) & STT:** Low-latency voice engines for fluid interaction.
 * **Optimization of energy consumption:** Optimized code for minimal energy waste.
