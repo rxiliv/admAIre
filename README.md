@@ -55,8 +55,8 @@ The electronic schematics may be found within the `pcb` folder.
 * **Slide Switch:** Slide Switch (SPST) for power-on/off.
 * **Resistors** 100-200kΩ Resistors (x2).
 
-The eyeglasses frame are made through a 3D printer.
-The 3D model is available in the **cad** folder.
+The eyeglasses frame prototype is made through a 3D printer (PLA).
+The 3D model is available in the `cad` folder, both as a one-piece and subdivided in `.stl` format, making it suitable for small 3D printers as well.
 
 ### Software
 The main code resides in the microcontroller and can be found in the `firmware` folder.
