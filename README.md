@@ -30,7 +30,7 @@ The system is based on a low-latency circular data flow:
 
 ### Open-Source Project
 The project was made to be free for everyone to use, edit and improve, based on one's own preferences, ideas, and much more.
-* **Source Code Available:** The microcontroller's C++ code is downloadable from the repository, in the software folder.
+* **Source Code Available:** The microcontroller's C++ code is downloadable and editable.
 * **Free-to-use 3D Model:** The glasses frame is also available, ready for alterations, or directly for the 3D printer.
 * **Guide for the Hardware:** The electrical schematics and the documentation is thought for people to understand how the prototype works and to use as they prefer.
 
