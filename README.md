@@ -8,8 +8,8 @@ The goal of AdmAIre is to bridge the gap between the user and the physical envir
 ## System Architecture
 The system is based on a low-latency circular data flow:
 1. **Acquisition:** The wearable captures images (camera) and eventual voice inputs.
-2. **Transmission:** Data is sent via **Wi-Fi connection** to the OpenRouter API.
-3. **Processing:** The AI models processe the data (Object Detection, OCR, Scene Description).
+2. **Transmission:** Data is sent via **Wi-Fi connection** to the OpenRouter AI model.
+3. **Processing:** The AI models process the data (Object Detection, OCR, Scene Description).
 4. **Feedback:** The AI sends the text response back to the glasses, which plays it through the integrated output devices.
 
 ## Key Features
@@ -29,7 +29,7 @@ The system is based on a low-latency circular data flow:
 The project was made to be free for everyone to use, edit and improve, based on one's own preferences, ideas, and much more, as long as the project terms and conditions of the license, available in the `root` folder, are respected.
 
 * **Source Code Available:** The microcontroller's C++ code is downloadable and editable.
-* **Free-to-use 3D Model:** The glasses frame is also available, ready for alterations, or directly for the 3D printer.
+* **Free-to-use 3D Model:** The eyeglasses frame is also available, ready for alterations, or directly for the 3D printer.
 * **Guide for the Hardware:** The electrical schematics and the documentation is thought for people to understand how the prototype works and to use as they prefer.
 
 ### Planned Features
@@ -38,7 +38,7 @@ The project was made to be free for everyone to use, edit and improve, based on 
 * **Text Reading (OCR):** Ability to read labels, menus, or road signs in real-time.
 
 **Advanced User Assistance**
-* **Voice Activation:** The user can speak with the AI assistance through the phrase "Hey AdmAIre".
+* **Voice Activation:** The user can speak with the AI assistance through the phrase "Hey AdmAIre", captured by the integrated microphone.
 * **Quick and Brief Alerts:** When near to obstacles, the device immediately detects the danger and warns the user.
 
 ## Technical Architecture
@@ -55,7 +55,7 @@ The electronic schematics may be found within the `pcb` folder.
 * **Slide Switch:** Slide Switch (SPST) for power-on/off.
 * **Resistors** 100-200kΩ Resistors (x2).
 
-The glasses frame are made through a 3D printer.
+The eyeglasses frame are made through a 3D printer.
 The 3D model is available in the **cad** folder.
 
 ### Software
@@ -63,7 +63,7 @@ The main code resides in the microcontroller and can be found in the `firmware` 
 
 **Code Content**
 * **Microcontroller Code:** Code that allows the ESP32-S3 to send and receive radio signals, send the AI responses, and all the features mentioned above.
-* **Simple HTML page:** Simple page for testing the device and debugging.
+* **Simple HTML page:** Simple page visible in local host for testing the device and debugging.
 
 **Features and Technologies**
 * **OpenRouter API:** Implementation of optimized AI models to analyze images and to respond to user queries in natural language.
