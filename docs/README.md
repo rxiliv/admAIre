@@ -2,12 +2,8 @@
 
 AdmAIre is a cutting-edge wearable electronic device designed to enhance the autonomy and safety of blind or visually impaired individuals. Through the integration of artificial intelligence and computer vision, the device analyzes the surrounding environment in real-time, providing interactive and intuitive voice assistance.
 
---
-
 ## Project Overview
 The goal of AdmAIre is to bridge the gap between the user and the physical environment. Not only the system quickly detects the obstacles in the user's way, communicating essential information through an integrated audio interface, but it also allows the user to ask anything, as if they were talking to a person nearby, but keeping their full independence.
-
---
 
 ## System Architecture
 The system is based on a low-latency circular data flow:
@@ -15,8 +11,6 @@ The system is based on a low-latency circular data flow:
 2. **Transmission:** Data is sent via **Bluetooth Low Energy (BLE)** or **Classic** to the smartphone.
 3. **Processing:** The mobile app processes the data using AI models (Object Detection, OCR, Scene Description).
 4. **Feedback:** The app sends the audio signal to the wearable, which plays it through the integrated output devices.
-
---
 
 ## Key Features
 
@@ -44,8 +38,6 @@ The project was made to be free for everyone to use, edit and improve, based on 
 **Advanced User Assistance**
 * **Voice Activation:** The user can speak with the AI assistance through the phrase "Hey AdmAIre".
 * **Quick and Brief Alerts:** When near to obstacles, the device immediately detects the danger and warns the user.
-
---
 
 ## Technical Architecture
 
