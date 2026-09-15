@@ -8,7 +8,7 @@ The goal of AdmAIre is to bridge the gap between the user and the physical envir
 ## System Architecture
 The system is based on a low-latency circular data flow:
 1. **Acquisition:** The wearable captures images (camera) and eventual voice inputs.
-2. **Transmission:** Data is sent via **Wi-Fi connection** to the OpenRouter AI model.
+2. **Transmission:** Data is sent via **Wi-Fi connection** to the OpenRouter AI model (through the API).
 3. **Processing:** The AI models process the data (Object Detection, OCR, Scene Description).
 4. **Feedback:** The AI sends the text response back to the glasses, which plays it through the integrated output devices.
 
@@ -17,7 +17,7 @@ The system is based on a low-latency circular data flow:
 ### Implemented Features
 
 **Surroundings Analysis**
-* **Object and Scene Recognition:** Real-time identification of everyday elements (means of transport, moving obstacles, furniture, signage).
+* **Object and Scene Recognition:** Real-time identification of potentially dangerous everyday elements.
 
 **Well-thought-out Design**
 * **Ergonomic Glasses:** Lightweight and discreet device, optimized for prolonged use.
