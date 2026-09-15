@@ -18,6 +18,8 @@ Il sistema è basato su un flusso di dati circolare a bassa latenza:
 
 **Analisi delle Circostanze**
 * **Riconoscimento di Oggetti e Scene:** Identificazione in tempo reale di elementi quotidiani che possono costituire un pericolo.
+* **Avvisi Veloci e Brevi:** Quando l'utente si trova vicino ad ostacoli, il dispositivo rileva immediatamente il pericolo e avvisa l'utente.
+* **Lettura di Testi (OCR):** Abilità di leggere etichette, menù o segnali stradali in tempo reale.
 
 **Design Ben Pensato**
 * **Occhiali Ergonomici:** Dispositivo leggero e discreto, ottimizzato per l'uso prolungato.
@@ -35,11 +37,9 @@ Il progetto è stato creato con l'intenzione di essere utilizzato, modificato e 
 ### Funzionalità Previste in Futuro
 **Analisi Avanzata delle Circostanze**
 * **Interfaccia Vocale AI (NLP):** Comunicazione bidirezionale che permette all'utente di fare domande come: *"C'è una sedia libera vicino a me?"* or *"Che pullman sta arrivando?"*.
-* **Lettura di Testi (OCR):** Abilità di leggere etichette, menù o segnali stradali in tempo reale.
 
 **Assistenza per Utenti Avanzata**
 * **Attivazione Vocale:** L'utente può parlare con l'assistente AI attraverso la dicitura "Hey AdmAIre", individuata dal microfono integrato.
-* **Avvisi Veloci e Brevi:** Quando l'utente si trova vicino ad ostacoli, il dispositivo rileva immediatamente il pericolo e avvisa l'utente.
 
 ## Architettura Tecnica
 

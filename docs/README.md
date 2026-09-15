@@ -18,6 +18,8 @@ The system is based on a low-latency circular data flow:
 
 **Surroundings Analysis**
 * **Object and Scene Recognition:** Real-time identification of potentially dangerous everyday elements.
+* **Quick and Brief Alerts:** When near to obstacles, the device immediately detects the danger and warns the user.
+* **Text Reading (OCR):** Ability to read labels, menus, or road signs in real-time.
 
 **Well-thought-out Design**
 * **Ergonomic Glasses:** Lightweight and discreet device, optimized for prolonged use.
@@ -35,11 +37,9 @@ The project was made to be free for everyone to use, edit and improve, based on 
 ### Planned Features
 **Advanced Surroundings Analysis**
 * **AI Voice Interface (NLP):** Two-way communication that allows the user to ask questions such as: *"Is there a free chair near me?"* or *"What bus number is arriving?"*.
-* **Text Reading (OCR):** Ability to read labels, menus, or road signs in real-time.
 
 **Advanced User Assistance**
 * **Voice Activation:** The user can speak with the AI assistance through the phrase "Hey AdmAIre", captured by the integrated microphone.
-* **Quick and Brief Alerts:** When near to obstacles, the device immediately detects the danger and warns the user.
 
 ## Technical Architecture
 
