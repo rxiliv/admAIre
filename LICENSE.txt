@@ -1,0 +1,53 @@
+Copyright (c) [2026] [rxiliv (from GitHub)]
+
+===========================================================================
+CREATIVE COMMONS ATTRIBUTION-NONCOMMERCIAL-SHAREALIKE 4.0 INTERNATIONAL
+===========================================================================
+
+By exercising the Licensed Rights (defined below), You accept and agree to 
+be bound by the terms and conditions of this Creative Commons Attribution-
+NonCommercial-ShareAlike 4.0 International Public License ("Public License"). 
+
+---------------------------------------------------------------------------
+1. Rights Granted & Conditions
+---------------------------------------------------------------------------
+Under this Public License, you are free to:
+
+  - Share: Copy, distribute, and transmit the hardware files, schematics, 
+    CAD models, software code, and documentation in any medium or format.
+  - Adapt: Remix, transform, build upon, and modify the source files for 
+    any personal, educational, or research purposes.
+
+Under the following mandatory terms:
+
+  a. Attribution: You must give appropriate credit to the original author, 
+     provide a link to the original repository:
+     [Insert Your GitHub Repo URL Here]
+     and indicate if any changes were made to the original project. You may 
+     do so in any reasonable manner, but not in any way that suggests the 
+     licensor endorses you or your use.
+
+  b. NonCommercial: You may NOT use the material, hardware designs, binary 
+     builds, or software source code for commercial purposes, monetary 
+     gain, or commercial advantage.
+
+  c. ShareAlike: If you remix, transform, or build upon the material, you 
+     must distribute your contributions under the exact same license as 
+     this original.
+
+---------------------------------------------------------------------------
+2. Commercial Inquiries
+---------------------------------------------------------------------------
+If you wish to use, build, manufacture, or sell this project (or derivative 
+works of it) for commercial purposes, you must obtain prior written permission 
+and a commercial license from the copyright holder:
+
+Contact: [rxichn@gmail.com]
+
+===========================================================================
+DISCLAIMER OF WARRANTIES
+===========================================================================
+THE WORK IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR 
+IMPLIED. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR 
+ANY CLAIM, DAMAGES, OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, 
+TORT, OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE WORK.
