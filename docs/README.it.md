@@ -40,6 +40,7 @@ Il progetto è stato creato con l'intenzione di essere utilizzato, modificato e 
 
 **Assistenza per Utenti Avanzata**
 * **Attivazione Vocale:** L'utente può parlare con l'assistente AI attraverso la dicitura "Hey AdmAIre", individuata dal microfono integrato.
+* **API per Dettagli di Viaggio:** L'assistenza AI può fornire indicazioni stradali per una destinazione specifica quando richiesto, tramite l'implementazione di un API apposita.
 
 ## Architettura Tecnica
 
@@ -70,3 +71,13 @@ Il software è creato con Arduino IDE.
 * **API di OpenRouter:** Implementazione dell'API di OpenRouter per usufruire di modelli AI ottimizzati per analizzare immagini e rispondere alle necessità e domande dell'utente in linguaggio naturale.
 * **Text-to-Speech (TTS) & STT:** Meccanismi di interazione vocale a bassa latenza.
 * **Ottimizzazione del Consumo di Energia:** Codice ottimizzato per minimizzare lo spreco energetico.
+
+## Istruzioni per l'Uso
+
+Per poter ricreare il prototipo personalmente, tutte le informazioni e risorse sono già presenti all'interno della repository. 
+Per quanto riguarda il codice sorgente, le uniche aggiunte che vanno apportate si trovano in `esp32s3.h`:
+* **SSID del Wi-Fi:**: Il nome della rete a cui si connetterà l'ESP32-S3.
+* **Password del Wi-Fi:** La password della rete.
+* **Chiave API di OpenRouter:** La chiave API può essere facilmente ottenuta tramite i servizi di OpenRouter.
+
+**N. B.:** Il modello AI utilizzato di default nel codice sorgente è l'Nvidia Nemotron 3 Nano Omni, un modello gratuito. Si può utilizzare qualunque altro modello AI che permette di prendere in input foto e audio e produrre in output testo, finché il codice venga aggiornato adeguatamente.
