@@ -8,7 +8,7 @@ The goal of AdmAIre is to bridge the gap between the user and the physical envir
 ## System Architecture
 The system is based on a low-latency circular data flow:
 1. **Acquisition:** The wearable captures images (camera) and eventual voice inputs.
-2. **Transmission:** Data is sent via **Wi-Fi connection** to the OpenRouter AI model (through the API).
+2. **Transmission:** Data is sent via **Wi-Fi connection** to the Groq AI model (through the API).
 3. **Processing:** The AI models process the data (Object Detection, OCR, Scene Description).
 4. **Feedback:** The AI sends the text response back to the glasses, which plays it through the integrated output devices.
 
@@ -68,16 +68,21 @@ The software is made through Arduino IDE.
 * **Simple HTML page:** Simple page for testing the device and debugging.
 
 **Features and Technologies**
-* **OpenRouter API:** Implementation of the OpenRouter API to use optimized AI models to analyze images and to respond to user queries in natural language.
+* **Groq API:** Implementation of the Groq API to use optimized AI models to analyze images and to respond to user queries in natural language.
 * **Text-to-Speech (TTS) & STT:** Low-latency voice engines for fluid interaction.
 * **Optimization of Energy Consumption:** Optimized code for minimal energy waste.
 
 ## Usage Instructions
 
 To be able to recreate the prototype personally, all the information and resources are already present in the repository.
-For the source code, the only things that need to be added are in `esp32s3.h`:
-* **Wi-Fi SSID**: The name of the network the ESP32-S3 has to connect to. 
-* **Wi-FI password**: The password of the network. 
-* **OpenRouter API Key**: The API Key can be easily obtained from the OpenRouter services. 
+For the source code, copy `software/src/admaire/secrets.example.h` to `secrets.h` (excluded from git) and fill in:
+* **Wi-Fi SSID**: The name of the network the ESP32-S3 has to connect to.
+* **Wi-Fi password**: The password of the network.
+* **Groq API Key**: Free key available at https://console.groq.com/keys.
 
-**Please Note**: The AI model chosen by default in the source code is the Nvidia Nemotron 3 Nano Omni, a free model. Any other AI model that can have in input photos and audio and have text output can be used, as long as the code gets updated adequately. 
+Required Arduino libraries: **ESP32-audioI2S** (v3.x) and **ArduinoJson** (v7). In Arduino IDE select the board *XIAO_ESP32S3* and set *Tools > PSRAM > OPI PSRAM*.
+Once powered on, the console web app is reachable at `http://admaire.local` or at the IP address printed on the serial monitor.
+
+**Please Note**: The AI model used by default is Qwen 3.8 27B on Groq (`GROQ_MODEL` in `esp32s3.h`), with reasoning disabled for minimal latency (under a second per image). On the free tier Groq allows about 3 image analyses per minute.
+
+**Battery**: the XIAO ESP32S3 charges the battery at 100 mA through its USB-C port (about 16-18 hours for a full 1600 mAh charge). The battery is only connected to the charger when the slide switch is **ON**. The red LED on the board blinks while charging and turns off when the battery is full.

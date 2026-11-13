@@ -8,7 +8,7 @@ L'obiettivo principale di AdmAIre è quello di creare un ponte solido tra l'uten
 ## Architettura di Sistema
 Il sistema è basato su un flusso di dati circolare a bassa latenza:
 1. **Acquisizione:** Gli occhiali catturano immagini, attraverso la telecamera integrata, ed eventuali input vocali.
-2. **Trasmissione:** I dati vengono trasmessi tramite **Connessione Wi-Fi** al modello AI di OpenRouter (tramite l'API).
+2. **Trasmissione:** I dati vengono trasmessi tramite **Connessione Wi-Fi** al modello AI di Groq (tramite l'API).
 3. **Elaborazione:** I modelli AI elaborano i dati (Object Detection, OCR, Scene Description).
 4. **Feedback:** Il modello manda indietro la risposta in formato testo agli occhiali, che la riproducono tramite i dispositivi di output integrati.
 
@@ -68,16 +68,21 @@ Il software è creato con Arduino IDE.
 * **Pagina HTML Semplice:** Pagine semplice per testare il dispositivo e fare debugging.
 
 **Tecnologie e Funzionalità**
-* **API di OpenRouter:** Implementazione dell'API di OpenRouter per usufruire di modelli AI ottimizzati per analizzare immagini e rispondere alle necessità e domande dell'utente in linguaggio naturale.
+* **API di Groq:** Implementazione dell'API di Groq per usufruire di modelli AI ottimizzati per analizzare immagini e rispondere alle necessità e domande dell'utente in linguaggio naturale.
 * **Text-to-Speech (TTS) & STT:** Meccanismi di interazione vocale a bassa latenza.
 * **Ottimizzazione del Consumo di Energia:** Codice ottimizzato per minimizzare lo spreco energetico.
 
 ## Istruzioni per l'Uso
 
-Per poter ricreare il prototipo personalmente, tutte le informazioni e risorse sono già presenti all'interno della repository. 
-Per quanto riguarda il codice sorgente, le uniche aggiunte che vanno apportate si trovano in `esp32s3.h`:
-* **SSID del Wi-Fi:**: Il nome della rete a cui si connetterà l'ESP32-S3.
+Per poter ricreare il prototipo personalmente, tutte le informazioni e risorse sono già presenti all'interno della repository.
+Per quanto riguarda il codice sorgente, copiare `software/src/admaire/secrets.example.h` in `secrets.h` (escluso da git) e inserire:
+* **SSID del Wi-Fi:** Il nome della rete a cui si connetterà l'ESP32-S3.
 * **Password del Wi-Fi:** La password della rete.
-* **Chiave API di OpenRouter:** La chiave API può essere facilmente ottenuta tramite i servizi di OpenRouter.
+* **Chiave API di Groq:** Chiave gratuita ottenibile su https://console.groq.com/keys.
 
-**N. B.:** Il modello AI utilizzato di default nel codice sorgente è l'Nvidia Nemotron 3 Nano Omni, un modello gratuito. Si può utilizzare qualunque altro modello AI che permette di prendere in input foto e audio e produrre in output testo, finché il codice venga aggiornato adeguatamente.
+Librerie Arduino necessarie: **ESP32-audioI2S** (v3.x) e **ArduinoJson** (v7). In Arduino IDE selezionare la scheda *XIAO_ESP32S3* e impostare *Strumenti > PSRAM > OPI PSRAM*.
+All'accensione la web app di controllo è raggiungibile su `http://admaire.local` oppure all'indirizzo IP mostrato sul monitor seriale.
+
+**N. B.:** Il modello AI utilizzato di default è Qwen 3.8 27B su Groq (`GROQ_MODEL` in `esp32s3.h`), con il ragionamento disattivato per ridurre al minimo la latenza (meno di un secondo per immagine). Con il piano gratuito Groq consente circa 3 analisi di immagini al minuto.
+
+**Batteria:** la XIAO ESP32S3 carica la batteria a 100 mA tramite la porta USB-C (circa 16-18 ore per una carica completa da 1600 mAh). La batteria è collegata al caricatore solo con l'interruttore in posizione **ON**. Il LED rosso sulla scheda lampeggia durante la carica e si spegne a batteria carica.
