@@ -1,4 +1,5 @@
-#include "Audio.h" 
+#include "Audio.h"
+#include <ESPmDNS.h>
 
 #include "esp32s3.h"
 
@@ -8,19 +9,50 @@
 Audio audio;
 String testoCorrenteAudio = ""; // Buffer protetto per la RAM
 
+static void connettiWiFi() {
+    WiFi.persistent(false);
+    WiFi.mode(WIFI_STA);
+    WiFi.setAutoReconnect(true);
+    WiFi.begin(WIFI_SSID, WIFI_PASSWORD);
+
+    Serial.print("[Wi-Fi] Connessione a " WIFI_SSID "...");
+    uint32_t inizio = millis();
+    while (WiFi.status() != WL_CONNECTED) {
+        if (millis() - inizio > 30000) {
+            Serial.println("\n[Wi-Fi] Timeout, riavvio...");
+            ESP.restart();
+        }
+        delay(250);
+        Serial.print(".");
+    }
+    // Il risparmio energetico del Wi-Fi aggiunge centinaia di ms di latenza
+    WiFi.setSleep(false);
+    Serial.print("\n[OK] Connesso! Apri http://");
+    Serial.print(WiFi.localIP());
+    Serial.println(" oppure http://admaire.local");
+}
+
+static void callbackAudio(Audio::msg_t m) {
+    if (m.e == Audio::evt_eof) audioInRiproduzione = false;
+    if (m.msg) Serial.printf("[AUDIO] %s\n", m.msg);
+}
+
 void setup() {
     Serial.begin(115200);
-    delay(2000); 
+#if ARDUINO_USB_CDC_ON_BOOT
+    // Senza PC collegato la seriale USB non deve rallentare il programma
+    Serial.setTxTimeoutMs(0);
+#endif
+    delay(1000);
     Serial.println("--- AVVIO SISTEMA ADMAIRE ---");
 
-    // Verifica PSRAM
     Serial.printf("[PSRAM] dimensione totale: %u byte, libera: %u byte\n",
                   ESP.getPsramSize(), ESP.getFreePsram());
     if (ESP.getPsramSize() == 0) {
-        Serial.println("[PSRAM] ATTENZIONE: nessuna PSRAM rilevata! Controlla Tools > PSRAM in Arduino IDE.");
+        Serial.println("[PSRAM] ATTENZIONE: nessuna PSRAM rilevata! Imposta Tools > PSRAM > OPI PSRAM in Arduino IDE.");
     }
 
-    setCpuFrequencyMhz(160); 
+    setCpuFrequencyMhz(160);
 
     if (!inizializzaXiaoCamera()) {
         Serial.println("[ERRORE CRITICO] Inizializzazione modulo Camera fallita!");
@@ -28,78 +60,41 @@ void setup() {
     }
     Serial.println("[OK] Interfaccia Camera configurata.");
 
-    WiFi.persistent(false);
-    WiFi.disconnect(true);
-    delay(500);
-    
-    WiFi.mode(WIFI_STA);
-    WiFi.begin(ssid, password);
-    
-    Serial.print("[Wi-Fi] Connessione a " + String(ssid) + "...");
-    while (WiFi.status() != WL_CONNECTED) {
-        delay(500);
-        Serial.print(".");
-    }
-    Serial.print("\n[OK] Connesso! IP: http://");
-    Serial.println(WiFi.localIP());
+    connettiWiFi();
+    MDNS.begin("admaire");
+    MDNS.addService("http", "tcp", 80);
 
-    WiFi.setSleep(false);
-
+    Audio::audio_info_callback = callbackAudio;
     audio.setPinout(I2S_BCLK, I2S_LRC, I2S_DOUT);
-    audio.setVolume(21); 
+    audio.setVolume(volumeCorrente);
 
-    // Test di Avvio
-    audio.connecttospeech("Sistema pronto", "it");
+    avviaTaskAI();
+    configuraServerWeb();
 
-    server.on("/", HTTP_GET, gestisciRoot);
-    server.on("/capture", HTTP_GET, gestisciCattura);
-    server.on("/analyze", HTTP_GET, gestisciAnalisi);
-    server.on("/battery", HTTP_GET, gestisciBatteria);
-    
-    server.enableCORS(true); 
-    server.begin();
+    accodaVoce("Sistema pronto");
     Serial.println("[SISTEMA] Pronti all'uso.");
 }
 
 void loop() {
     audio.loop();
-    server.handleClient(); 
+    server.handleClient();
+    aggiornaBatteria();
 
-    if (testoDaVocalizzare != "") {
-        // Per garantire la totale pulizia del Wi-Fi
-        if (millis() - timestampRicezioneTesto > 2500) {
-            testoCorrenteAudio = pulisciTesto(testoDaVocalizzare);
-            testoDaVocalizzare = ""; 
-            
-            if (testoCorrenteAudio.length() > 0) {
-                Serial.print("[AUDIO] Riproduzione voce in corso: ");
-                Serial.println(testoCorrenteAudio);
-                Serial.printf("[AUDIO] Heap libero prima del TTS: %u\n", ESP.getFreeHeap());
-
-                if (audio.isRunning()) {
-                    audio.stopSong();
-                    delay(200);
-                }
-
-                bool avviato = audio.connecttospeech(testoCorrenteAudio.c_str(), "it");
-                if (!avviato) {
-                    Serial.println("[AUDIO] connecttospeech() ha restituito false, ritento tra 400ms");
-                    delay(400);
-                    avviato = audio.connecttospeech(testoCorrenteAudio.c_str(), "it");
-                    Serial.printf("[AUDIO] Secondo tentativo: %s\n", avviato ? "OK" : "FALLITO");
-                }
-            }
-        }
+    if (volumeRichiesto >= 0) {
+        audio.setVolume(volumeRichiesto);
+        volumeRichiesto = -1;
     }
-}
 
-// Callback diagnostico della libreria
-void audio_info(const char *info) {
-    Serial.print("[AUDIO INFO] ");
-    Serial.println(info);
-}
-
-void audio_eof_speech(const char *info) {
-    Serial.print("[AUDIO] Riproduzione terminata: ");
-    Serial.println(info);
+    if (prelevaTestoDaVocalizzare(testoCorrenteAudio)) {
+        Serial.printf("[AUDIO] Riproduzione: %s (heap libero %u)\n", testoCorrenteAudio.c_str(), ESP.getFreeHeap());
+        if (audio.isRunning()) audio.stopSong();
+        bool avviato = audio.connecttospeech(testoCorrenteAudio.c_str(), "it");
+        if (!avviato) {
+            delay(150);
+            avviato = audio.connecttospeech(testoCorrenteAudio.c_str(), "it");
+            Serial.printf("[AUDIO] Secondo tentativo: %s\n", avviato ? "OK" : "FALLITO");
+        }
+        audioInRiproduzione = avviato;
+    }
+    if (audioInRiproduzione && !audio.isRunning()) audioInRiproduzione = false;
 }
